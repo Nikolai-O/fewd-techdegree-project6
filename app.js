@@ -24,6 +24,12 @@ const songTitles = [
     'The Book of Souls'
 ]
 
+let startOver = document.createElement('button')
+startOver.textContent = 'Play again?'
+overlay.appendChild(startOver);
+overlay.lastElementChild.textContent = "Play again?";
+overlay.lastElementChild.style.display = 'none';
+
 function getRandomSongTitle(arr) {
     const rand = Math.floor(Math.random() * arr.length);
     const songStr = arr[rand];
@@ -69,30 +75,60 @@ function checkLetter(button) {
     }
 }
 
+function reset() {
+    missed = 0;
+    let li = document.querySelectorAll('li');
+    for ( let i = 0; i < li.length; i++) {
+        li[i].remove();
+    }
+    let buttons = document.querySelectorAll('.chosen');
+    for ( let i = 0; i < buttons.length; i++ ) {
+        buttons[i].className = '';
+    }
+    for ( let i = 0; i < 5; i++ ) {
+       let ol = document.getElementsByTagName('ol')[0];
+       let heart = document.createElement('li');
+       heart.className = 'tries';
+       let img = document.createElement('img');
+       img.src = "images/liveHeart.png";
+       img.style.height = "35px"
+       img.style.width = "30px"
+       heart.appendChild(img);
+       ol.appendChild(heart)
+    }
+    song = getRandomSongTitle(songTitles);
+    addPhraseToDisplay(song);
+    overlay.style.display = 'none';
+}
+
 function checkWin(misses) {
     if ( misses >= 5 ) {
         overlay.className = ('lose');
         overlay.style.display = 'block';
         overlay.firstElementChild.textContent = "You lose!";
         document.querySelector('.btn__reset').style.display = 'none';
-        let startOver = document.createElement('button')
-        startOver.textContent = 'Play again?'
-        overlay.appendChild(startOver);
-        overlay.lastElementChild.textContent = "Play again?";
+        // let startOver = document.createElement('button')
+        // startOver.textContent = 'Play again?'
+        // overlay.appendChild(startOver);
+        // overlay.lastElementChild.textContent = "Play again?";
+        overlay.lastElementChild.style.display = '';
         startOver.addEventListener('click', () => {
-            location.reload();
+            // location.reload();
+            reset();
         })
     } else if ( document.querySelectorAll('.letter').length == document.querySelectorAll('.show').length ) {
         overlay.className = ('win');
         overlay.style.display = 'block';
         overlay.firstElementChild.textContent = "You win!";
         document.querySelector('.btn__reset').style.display = 'none';
-        let startOver = document.createElement('button')
-        startOver.textContent = 'Play again?'
-        overlay.appendChild(startOver);
-        overlay.lastElementChild.textContent = "Play again?";
+        // let startOver = document.createElement('button')
+        // startOver.textContent = 'Play again?'
+        // overlay.appendChild(startOver);
+        // overlay.lastElementChild.textContent = "Play again?";
+        overlay.lastElementChild.style.display = '';
         startOver.addEventListener('click', () => {
-            location.reload();
+            // location.reload();
+            reset();
     })
 }}
 
@@ -112,5 +148,5 @@ keyboard.addEventListener('click', (e) => {
     checkWin(missed);
 });
 
-const song = getRandomSongTitle(songTitles);
+let song = getRandomSongTitle(songTitles);
 addPhraseToDisplay(song);
