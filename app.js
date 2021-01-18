@@ -107,13 +107,8 @@ function checkWin(misses) {
         overlay.style.display = 'block';
         overlay.firstElementChild.textContent = "You lose!";
         document.querySelector('.btn__reset').style.display = 'none';
-        // let startOver = document.createElement('button')
-        // startOver.textContent = 'Play again?'
-        // overlay.appendChild(startOver);
-        // overlay.lastElementChild.textContent = "Play again?";
         overlay.lastElementChild.style.display = '';
         startOver.addEventListener('click', () => {
-            // location.reload();
             reset();
         })
     } else if ( document.querySelectorAll('.letter').length == document.querySelectorAll('.show').length ) {
@@ -121,13 +116,8 @@ function checkWin(misses) {
         overlay.style.display = 'block';
         overlay.firstElementChild.textContent = "You win!";
         document.querySelector('.btn__reset').style.display = 'none';
-        // let startOver = document.createElement('button')
-        // startOver.textContent = 'Play again?'
-        // overlay.appendChild(startOver);
-        // overlay.lastElementChild.textContent = "Play again?";
         overlay.lastElementChild.style.display = '';
         startOver.addEventListener('click', () => {
-            // location.reload();
             reset();
     })
 }}
